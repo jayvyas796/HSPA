@@ -1,10 +1,12 @@
 
     <div class="card">
       <div class="card-img-wrapper">
-      <img src="assets/images/default_home.png" class="card-img-top" >
+      <img *ngIf="property.Image" src="assets/images/{{property.Image}}.jpg" class="card-img-top" style="height: 250px;" >
+      <img *ngIf="!property.Image" src="assets/images/default_home.png" class="card-img-top"  style="height: 250px;">
+
       <ul class="list-inline text-center member-icon animate">
         <li class="list-inline-item">
-          <button class="btn btn-primary"> <i class="fa-regular fa-pen-to-square"></i> </button>
+          <button class="btn btn-primary" routerLink="/property-details/{{property.Id}}"> <i class="fa-regular fa-pen-to-square"></i> </button>
         </li>
         <li class="list-inline-item">
           <button class="btn btn-primary"> <i class="fa-regular fa-address-book"></i> </button>

@@ -21,8 +21,29 @@ constructor(private http:HttpClient) { }
     })
   )
 }*/
-GetAllProperties() : Observable<IProperty[]> {
-  return this.http.get<IProperty[]>('data/properties.json');
+GetAllProperties(sellrentData:number) : Observable<IProperty[]> {
+  return this.http.get<IProperty[]>('data/properties.json').pipe(
+    map(data => {
+      const arrProp : IProperty[] = [];
+      for(const i in data){
+        if( data[i].SellRent === sellrentData){
+            arrProp.push(data[i]);
+        }
+      }
+      return arrProp;
+    })
+  );
+  /*return this.http.get('data/properties.json').pipe(
+    map(data => {
+      const propertyArray :Array<IProperty> = [];
+      for(const id in data){
+        if(data.hasOwnProperty(id)){
+          propertyArray.push(data[id]);
+        }
+      }
+      return propertyArray;
+    })
+  );*/
 }
 
 }

@@ -4,6 +4,8 @@ import { UserServiceService } from '../../../services/user-service.service';
 import { TitleStrategy } from '@angular/router';
 import { TmplAstSwitchBlockCase } from '@angular/compiler';
 import { User } from '../../../model/user';
+import { AlertifyService } from '../../../services/alertify.service';
+
 
 @Component({
   selector: 'app-user-register',
@@ -15,7 +17,8 @@ export class UserRegisterComponent implements OnInit {
   registrationForm : FormGroup ;
   user : User;
   userSubmitted :boolean;
-  constructor(private fb : FormBuilder,private userService : UserServiceService) { }
+  constructor(private fb : FormBuilder,private userService : UserServiceService, 
+    private alertifyService : AlertifyService ) { }
 
   ngOnInit() {
     // this.registrationForm=new FormGroup({
@@ -80,6 +83,10 @@ export class UserRegisterComponent implements OnInit {
     this.userService.addUser(this.userData());
     this.registrationForm.reset();
     this.userSubmitted=false;
+    this.alertifyService.success("Congratulation, You are successfully registered");
+    }
+    else{
+      this.alertifyService.error("Provide required fields");
     }
     
   }
